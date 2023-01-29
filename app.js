@@ -21,6 +21,18 @@ console.error(new Error("Houston, tenemos un problema!"));
 console.log(process.argv);  // [ node, app.js, arg1, arg2 ]
 console.log(process.argv[2], process.argv[3]);
 
-for (let i=2; i<process.argv.length;i++) {
+for (let i=2; i<process.argv.length; i++) {
     console.log(process.argv[i]);
 }
+console.log(process.memoryUsage());
+
+//2.3 Module OS
+const os = require("os");
+console.log("SO:", os.type());
+console.log("DIR:", os.homedir());
+console.log("UP:", os.uptime());
+console.log("USER:", os.userInfo());
+
+//2.4 Timers
+//setTimeout(funcion, retraso, arg1DeLaFuncion, arg2DeLaFuncion, ...)
+//1:24:05
