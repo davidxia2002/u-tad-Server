@@ -7,5 +7,10 @@ function adiosMundo() {
     return "bye";
 }
 
-module.exports.holaMundo = holaMundo;
-module.exports.adiosMundo = adiosMundo;
+//module.exports.holaMundo = holaMundo;
+//module.exports.adiosMundo = adiosMundo;
+
+module.exports =  {
+    holaMundo: holaMundo,
+    adiosMundo: adiosMundo
+};
