@@ -35,4 +35,34 @@ console.log("USER:", os.userInfo());
 
 //2.4 Timers
 //setTimeout(funcion, retraso, arg1DeLaFuncion, arg2DeLaFuncion, ...)
-//1:24:05
+function mostrarTema(tema) {
+    console.log("Estoy estudando " + tema);
+}
+
+function sumar(x, y) {
+    console.log(x + y);
+}
+
+setTimeout(mostrarTema, 3000, "NodeJS");
+setTimeout(sumar, 5000, 5, 6);
+
+console.log("Antes");
+setImmediate(mostrarTema, "Node.js");
+console.log("Despues");
+
+setInterval(mostrarTema, 2000, 'nodeJs');
+setInterval(sumar, 3000, 3, 4);
+
+//2.5 FS
+const fs = require("fs");
+//Método asíncrono, tal que se llama a la tercera función (anónima) cuando se haya completado
+fs.readFile("index.html", "utf-8", (err, content) => {
+    if(err) {
+        console.log(err);
+        throw err; //detiene la ejecución del programa y da más información
+    } else{
+        console.log(content);
+    }
+    console.log("Mensaje...") //Ver si se muestra si console.log y si throw err
+});
+
