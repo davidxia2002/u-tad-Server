@@ -59,7 +59,7 @@ const fs = require("fs");
 fs.readFile("index.html", "utf-8", (err, content) => {
     if(err) {
         console.log(err);
-        throw err; //detiene la ejecución del programa y da más información
+        //throw err; //detiene la ejecución del programa y da más información
     } else{
         console.log(content);
     }
