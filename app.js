@@ -33,7 +33,7 @@ console.log("DIR:", os.homedir());
 console.log("UP:", os.uptime());
 console.log("USER:", os.userInfo());
 
-//2.4 Timers
+/*2.4 Timers
 //setTimeout(funcion, retraso, arg1DeLaFuncion, arg2DeLaFuncion, ...)
 function mostrarTema(tema) {
     console.log("Estoy estudando " + tema);
@@ -52,17 +52,60 @@ console.log("Despues");
 
 setInterval(mostrarTema, 2000, 'nodeJs');
 setInterval(sumar, 3000, 3, 4);
+*/
 
-//2.5 FS
+//2.5 FS (trabajar con una copia de index.html)
 const fs = require("fs");
 //Método asíncrono, tal que se llama a la tercera función (anónima) cuando se haya completado
 fs.readFile("index.html", "utf-8", (err, content) => {
     if(err) {
-        console.log(err);
-        //throw err; //detiene la ejecución del programa y da más información
+        //console.log(err);
+        throw err; //detiene la ejecución del programa y da más información
     } else{
         console.log(content);
     }
     console.log("Mensaje...") //Ver si se muestra si console.log y si throw err
 });
+
+//Async
+/* Renombrar fichero
+fs.rename("index.html", "main.html", (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log("Nombre cambiado con éxito");
+});
+*/
+
+/*Agregar contenida al final de un archivo (append)
+fs.appendFile('index.html', '<p>Hola</p>', (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log("Archivo actualizado");
+});
+*/
+
+/*Reemplazar todo el contenido del archivo
+fs.writeFile("index.html", "Contenido Nuevo", (err)=>{
+    if (err) {
+        throw err;
+    }
+    console.log('Contenido reemplazado exitosamente');
+});
+*/
+
+/*Eliminar un archivo
+fs.unlink("index_copy.html", (err)=> {
+    if (err) {
+        throw err;
+    }
+    console.log("Archivo elmiminado");
+});
+*/
+/*Método síncrono ejemplo, con el resto es igual.*/
+const content = fs.readFileSync("index.html", "utf-8");
+console.log(content);
+
+console.log("Mensaje final"); //Ver cuando es asíncrono y cuando es síncrono (añadiendo al nombre de las funciones Sync)
 
