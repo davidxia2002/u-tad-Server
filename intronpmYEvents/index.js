@@ -8,6 +8,14 @@ emisorProductos.on('compra', () => { //Cuando occurra el evento 'compra', defini
 }); 
 
 emisorProductos.emit('compra');
-emisorProductos.emit('compra');
+
+//Si necesitáramos parámetros:
+
+emisorProductos.on('compra2', (total, numProductos) => {
+    console.log("Se realizó la compra 2 del producto", numProductos, "por un total de", "$"+total);
+})
+
+emisorProductos.emit('compra2', 100, 10);
+
 
 
