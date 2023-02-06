@@ -47,7 +47,7 @@ solicitarProducto("MASTER")
     });
 */
 
-//La forma que hemos visto se podría complicar mucho, para hacerlo mejor, lo haríamos tal que:
+//La forma que hemos visto se podría complicar mucho, para hacerlo mejor, como se usa habitualmente, lo haríamos tal que:
 
 async function realizarPedido(producto) { //Le indicamos que nuestra función tiene código asíncrono, y por tanto, que devolverá un Promesa
     try {
@@ -61,6 +61,7 @@ async function realizarPedido(producto) { //Le indicamos que nuestra función ti
     }
 }
 
-realizarPedido("MASTER");
+realizarPedido("MASTER"); //Como una function con async devuelve una Promise, podemos usar los métodos .then() y .catch() en la llamada.
+//realizarPedido("GRADO"); //Prueba para que dé error
 
 
