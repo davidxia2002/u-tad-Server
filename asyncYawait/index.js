@@ -1,12 +1,12 @@
-//Tenemos una tienda y queremos vender un producto (esta operación será asíncrona)
-function venderProducto(producto) {
+//Tenemos una tienda y queremos solicitar un producto (esta operación será asíncrona)
+function solicitarProducto(producto) {
     return new Promise((resolve, reject) => { //resolve y reject son dos funciones que se asignan automáticamente
-        console.log("Venta:", producto, "de U-tad");
+        console.log("Solicitando:", producto, "de U-tad");
         //simulamos proceso asíncrono con setTimeout
         setTimeout(() => {
             if (producto === "MASTER") {
                 //Aquí se ejecutaría la lógica de la venta, y al final la confirmación con resolve()
-                resolve("Venta de MASTER realizada!");
+                resolve("Solicitud de MASTER realizada.");
             } else {
                 reject('Este producto no está disponible actualmente');
             }
@@ -31,7 +31,8 @@ function procesarPedido(respuesta) {
    Para que se haga en un orden específico podemos hacerlo encadenando Promesas
 */
 
-venderProducto("MASTER")
+//solicitarProducto("GRADO") //Debería rechazarse
+solicitarProducto("MASTER")
     .then(respuesta => { //Primero se ejecuta el proceso venderProducto de manera asíncrona, y cuando se completa, se llama a procesarPedido dentro del .then().
                          //como es asíncrono, devuelve una promesa, por lo que con return estamos devolviendo esa promesa. Y, de este modo, encadenamos promesas.
         console.log("Respuesta recibida:", respuesta);
