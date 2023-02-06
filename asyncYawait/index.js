@@ -32,6 +32,7 @@ function procesarPedido(respuesta) {
 */
 
 //solicitarProducto("GRADO") //Debería rechazarse
+/*
 solicitarProducto("MASTER")
     .then(respuesta => { //Primero se ejecuta el proceso venderProducto de manera asíncrona, y cuando se completa, se llama a procesarPedido dentro del .then().
                          //como es asíncrono, devuelve una promesa, por lo que con return estamos devolviendo esa promesa. Y, de este modo, encadenamos promesas.
@@ -44,6 +45,22 @@ solicitarProducto("MASTER")
     .catch(err => {
         console.log(err);
     });
+*/
 
+//La forma que hemos visto se podría complicar mucho, para hacerlo mejor, lo haríamos tal que:
+
+async function realizarPedido(producto) { //Le indicamos que nuestra función tiene código asíncrono, y por tanto, que devolverá un Promesa
+    try {
+        //Detenemos la ejecución hasta que se complete el proceso con await (solo se puede usar con async)
+        const respuesta = await solicitarProducto(producto); //Prueba a hacerlo con y sin "await"
+        console.log("Respuesta recibida:", respuesta);
+        const respuestaProcesada = await procesarPedido(respuesta); //Prueba a hacerlo con y sin "await"
+        console.log(respuestaProcesada);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+realizarPedido("MASTER");
 
 
