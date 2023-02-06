@@ -21,7 +21,7 @@ let products = [
 
 //Crear una función para obtener los productos que debe ser asíncrona (simúlalo con setTimeout)
 function getProducts() {
-    return new Promise((resolve) => {
+    return new Promise((resolve) => { //Si no devuelvo el Promise no funcionaría porque setTimeout es asíncrona
         console.log("Cargando productos...");
         setTimeout(() => {
             resolve(products);
