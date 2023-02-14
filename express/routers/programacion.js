@@ -42,7 +42,9 @@ routerProgramacion.get('/:lenguaje/:nivel', (req, res) => {
     if (data.length === 0) {
         //return res.status(404).send("No se encontró el lenguaje ", + lenguaje + " de nivel " + nivel);
         //Otra opcioón es enviar una respuesta vacía
-        return res.status(404).end();
+        //return res.status(404).end();
+        //O también podemos devolver 204 (not content) si la ruta es válida pero no se encontró contenido
+        return res.status(204).end();
     }
     res.send(JSON.stringify(data));
 });
