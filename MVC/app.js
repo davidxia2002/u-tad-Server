@@ -10,6 +10,9 @@ const app = express()
 app.use(cors()) 
 app.use(express.json())
 
+//Le digo que directorio es publico
+app.use(express.static("storage")) // http://localhost:3000/file.jpg
+
 
 /* Aquí invocamos a las rutas */
 //app.use("/api", require("./routes/tracks"))
