@@ -1,4 +1,4 @@
-const { validateResult } = require("express-validator")
+const { validationResult } = require("express-validator")
 
 const validateResults = (req, res, next) => {
     try {
@@ -6,7 +6,7 @@ const validateResults = (req, res, next) => {
         return next() // Si no existe error con la validación se lo enviamos al siguiente (al controlador)
     } catch (err) {
         res.status(403) // Por ahora lo dejamos como no permitido
-        res.send({ errors: err.array() })
+        res.send(err)
     }
 }
 
