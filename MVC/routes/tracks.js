@@ -9,7 +9,7 @@ const { getItems, getItem, createItem } = require("../controllers/tracks")
 //router.get("/tracks", (req, res) => {
 router.get("/", getItems)
 router.get("/:id", getItem)
-//router.post("/", validatorCreateItem, createItem)
-router.post("/", validatorCreateItem, customHeader, createItem)
+router.post("/", validatorCreateItem, createItem)
+//router.post("/", validatorCreateItem, customHeader, createItem) // Podemos añadir tantos middleware como queramos
 
 module.exports = router
