@@ -19,4 +19,12 @@ const validatorCreateItem = [
     //(req, res, next) => validateResults(req, res, next) // Otra forma de invocarlo
 ]
 
-module.exports = { validatorCreateItem }
+
+const validatorGetItem = [
+    check("id").exists().notEmpty().isMongoId(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorCreateItem, validatorGetItem }

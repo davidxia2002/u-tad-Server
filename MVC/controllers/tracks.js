@@ -11,7 +11,7 @@ const getItems = async (req, res) => {
         const data = await tracksModel.find({})
         res.send(data)
     }catch(err){
-        //console.log(err)
+        //console.log(err) //Opcional
         //handleHttpError(res, 'ERROR_GET_ITEMS', 404)
         handleHttpError(res, 'ERROR_GET_ITEMS') //Si nos sirve el de por defecto que hemos establecido, no es necesario pasar el 403
     }
@@ -22,7 +22,15 @@ const getItems = async (req, res) => {
  * @param {} req 
  * @param {*} res 
  */
-const getItem = (req, res) => {
+const getItem = async (req, res) => {
+    try{
+        const {id} = matchedData(req) //Me quedo solo con el id
+        const data = await tracksModel.findById(id)
+        res.send(data)
+    } catch(err){
+        //console.log(err)
+        handleHttpError(res, "ERROR_GET_ITEM")
+    }
 }
 
 /**
@@ -37,10 +45,15 @@ const createItem = async (req, res) => {
         //res.send(data)
 
         //express-validator nos provee de la función matchedData
-        const body = req.body
-        const bodyClean = matchedData(req)
-        res.send({ body, bodyClean })
+        //const body = req.body //El dato según llega (si hay algún dato de más, nos daría error en el modelo)
+        //const bodyClean = matchedData(req) //El dato filtrado por las especificaciones
+        //res.send({ body, bodyClean })
+
+        const body = matchedData(req) //Dato filtrado por la definición en el validador
+        const data = await tracksModel.create(body);
+        res.send(data)    
     }catch(err){
+        //console.log(err)
         handleHttpError(res, 'ERROR_CREATE_ITEMS')
     }
 }
@@ -50,8 +63,15 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = (req, res) => {
-
+const updateItem = async (req, res) => {
+    try {
+        const {id, ...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
+        const data = await tracksModel.findOneAndUpdate(id, body);
+        res.send(data)    
+    }catch(err){
+        //console.log(err) 
+        handleHttpError(res, 'ERROR_UPDATE_ITEMS')
+    }
 }
 
 /**
@@ -59,8 +79,15 @@ const updateItem = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = (req, res) => {
-
+const deleteItem = async (req, res) => {
+    try {
+        const {id} = matchedData(req)
+        const data = await tracksModel.deleteOne({_id:id});
+        res.send(data)    
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, 'ERROR_DELETE_ITEM')
+    }
 }
 
 
