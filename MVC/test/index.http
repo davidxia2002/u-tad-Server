@@ -52,11 +52,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/api/tracks/63f668b4400c3077f0236199
+DELETE http://localhost:3000/api/tracks/63fba226c391fd40d29c4dd7
 
 ###
 
-POST http://localhost:3000/api/storage
+GET http://localhost:3000/api/storage
 
 ###
 
