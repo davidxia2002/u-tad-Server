@@ -14,10 +14,11 @@ const UserScheme = new mongoose.Schema(
             unique: true
         },
         password:{
-            type: String  // TODO Guardaremos el hash
+            type: String,  // TODO Guardaremos el hash
+            select: false
         },
         role:{
-            type: ["user", "admin"], // es el enum de SQL
+            type: ["user", "admin"], // es como el enum de SQL
             default: "user"
         }
     },
