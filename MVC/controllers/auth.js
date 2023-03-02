@@ -25,6 +25,7 @@ const registerCtrl = async (req, res) => {
         }
         res.send(data)  
     }catch(err) {
+        console.log(err)
         handleHttpError(res, "ERROR_REGISTER_USER")
     }
 }
@@ -36,7 +37,36 @@ const registerCtrl = async (req, res) => {
  * @param {*} res 
  */
 const loginCtrl = async (req, res) => {
-    //TODO
+    try {
+        req = matchedData(req)
+        const user = await usersModel.findOne({ email: req.email }).select("password name role email")
+
+        if(!user){
+            handleHttpError(res, "USER_NOT_EXISTS", 404)
+            return
+        }
+        
+        const hashPassword = user.password;
+        const check = await compare(req.password, hashPassword)
+
+        if(!check){
+            handleHttpError(res, "INVALID_PASSWORD", 401)
+            return
+        }
+
+        //Si no quisiera devolver el hash del password
+        user.set('password', undefined, {strict: false})
+        const data = {
+            token: await tokenSign(user),
+            user
+        }
+
+        res.send(data)
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_LOGIN_USER")
+    }
 }
 
 module.exports = { registerCtrl, loginCtrl }
