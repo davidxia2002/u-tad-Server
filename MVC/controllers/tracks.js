@@ -82,10 +82,11 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
     try {
         const {id} = matchedData(req)
-        const data = await tracksModel.deleteOne({_id:id});
+        //const data = await tracksModel.deleteOne({_id:id}); // "deleteOne" realiza el borrado físico en la BD
+        const data = await tracksModel.delete({_id:id}); // "delete" realiza el borrado lógico
         res.send(data)    
     }catch(err){
-        console.log(err)
+        //console.log(err)
         handleHttpError(res, 'ERROR_DELETE_ITEM')
     }
 }

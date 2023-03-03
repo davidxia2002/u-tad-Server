@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router();
 const uploadMiddleware = require("../utils/handleStorage")
-const { createItem } = require("../controllers/storage")
-
+const { getItem, getItems, createItem, deleteItem } = require("../controllers/storage")
+const { validatorGetItem } = require('../validators/storage')
 /*Lo moveremos a otro archivo
 const multer = require("multer")
 
@@ -29,6 +29,21 @@ router.post("/", uploadMiddleware.single("image"), (req, res) => {
 })
 */
 
+/**
+ * Lista de Items
+ */
+router.get("/", getItems)
+/**
+ * Detalle de Item
+ */
+router.get("/:id", validatorGetItem, getItem)
+/**
+ * Crear Item
+ */
 router.post("/", uploadMiddleware.single("image"), createItem)
+/**
+ * Eliminar Item
+ */
+router.delete("/:id", validatorGetItem, deleteItem);
 
 module.exports = router;
