@@ -16,7 +16,8 @@ const UserScheme = new mongoose.Schema(
             type: String  // TODO Guardaremos el hash
         },
         role:{
-            type: ["user", "admin"], // es el enum de SQL
+            type: String,
+            enum: ["user", "admin"], // es el enum de SQL
             default: "user"
         }
     },
