@@ -8,7 +8,7 @@ const { matchedData } = require('express-validator')
  */
 const getItems = async (req, res) => {
     try{
-        const user = req.user
+        const user = req.user //Obtengo trazabilidad del usuario, puedo ver qué solicita, su rol, etc.
         const data = await tracksModel.find({})
         res.send({data, user})
     }catch(err){
