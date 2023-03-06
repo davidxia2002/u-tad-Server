@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const JWT_SECRET = process.env.JWT_SECRET
+
 /**
  * El objeto del usuario
  * @param {*} user 
@@ -10,7 +10,7 @@ const tokenSign = async (user) => {
             _id: user._id,
             role: user.role
         },
-        JWT_SECRET,
+        process.env.JWT_SECRET,
         {
             expiresIn: "2h"
         }
@@ -24,7 +24,7 @@ const tokenSign = async (user) => {
  */
 const verifyToken = async (tokenJwt) => {
     try {
-        return jwt.verify(tokenJwt, JWT_SECRET)
+        return jwt.verify(tokenJwt, process.env.JWT_SECRET)
     }catch(err) {
         console.log(err)
     }
