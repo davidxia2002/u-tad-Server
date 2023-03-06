@@ -3,6 +3,8 @@ const router = express.Router()
 const customHeader = require("../middleware/customHeader")
 const { validatorCreateItem, validatorGetItem } = require("../validators/tracks")
 const { getItems, getItem, createItem, updateItem, deleteItem } = require("../controllers/tracks")
+const authMiddleware = require("../middleware/session")
+
 //TODO http://localhost:3000/tracks GET, POST, DELETE, PUT
 
 //El nombre del fichero se llama igual que la ruta, entonces
@@ -10,7 +12,7 @@ const { getItems, getItem, createItem, updateItem, deleteItem } = require("../co
  * Lista los items
  */
 //router.get("/tracks", (req, res) => {
-router.get("/", getItems)
+router.get("/", authMiddleware, getItems)
 
 /**
  * Obtiene detelle de un item (por id)
